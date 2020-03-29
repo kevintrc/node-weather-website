@@ -1,5 +1,3 @@
-console.log("Client side Script loaded");
-
 const weatherform = document.querySelector("form");
 const inputbox = document.querySelector("input");
 const responseMessage = document.querySelector("#response");
