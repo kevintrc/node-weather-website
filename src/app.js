@@ -66,7 +66,7 @@ app.get("/help", (req, res) => {
     res.render("help", {
         name: "Kevin Tony",
         title: "Help",
-        helpText: "help message"
+        helpText: "Contact kevtrc@gmail.com"
     });
 });
 app.get("/about", (req, res) => {

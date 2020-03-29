@@ -6,10 +6,10 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    min-height: 90vh;
+    min-height: 89vh;
 }
 form {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 .main-content {
     flex-grow: 1;
@@ -26,7 +26,9 @@ header a {
 header {
     color: green;
     margin-top: 16px;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid brown;
+    padding-bottom: 30px;
 }
 footer {
     color: brown;
@@ -34,6 +36,9 @@ footer {
     margin-top: 16px;
     padding: 16px 0;
 }
-img {
+#aboutimg {
     width: 300px;
+}
+#resimg {
+    height: 300px;
 }
