@@ -12,31 +12,29 @@ downloadingImage.onload = function() {
 weatherform.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/weather?address=" + encodeURIComponent(inputbox.value)).then(
-        (response) => {
-            response
-                .json()
-                .then(
-                    ({
-                        error,
-                        summary,
-                        temperature,
-                        precipProbability,
-                        location,
-                        smallImg,
-                        imgError
-                    }) => {
-                        if (error) responseMessage.textContent = error;
-                        else {
-                            locationMessage.textContent = location;
-                            responseMessage.textContent = `
+    fetch("/weather?address=" + encodeURIComponent(inputbox.value)).then((response) => {
+        response
+            .json()
+            .then(
+                ({
+                    error,
+                    summary,
+                    temperature,
+                    precipProbability,
+                    location,
+                    smallImg,
+                    imgError
+                }) => {
+                    if (error) responseMessage.textContent = error;
+                    else {
+                        locationMessage.textContent = location;
+                        responseMessage.textContent = `
                     ${summary}
                     Temperature is ${temperature} degree celsius and there is ${precipProbability}% chance of rain`;
-                        }
-                        if (imgError) downloadingImage.alt = imgError;
-                        else downloadingImage.src = smallImg;
                     }
-                );
-        }
-    );
+                    if (imgError) downloadingImage.alt = imgError;
+                    else downloadingImage.src = smallImg;
+                }
+            );
+    });
 });
