@@ -40,10 +40,9 @@ footer {
     width: 300px;
 }
 #resimg {
+    display: block;
     height: 40vh;
-    max-width: 800px;
-    margin: auto auto;
-    /* align-items: center; */
-    /* align-self: center; */
+    max-width: 650px;
+    margin: 0 auto;
     padding-top: 70px;
 }
