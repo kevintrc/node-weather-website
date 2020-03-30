@@ -1,14 +1,16 @@
-console.log("Client Srcipt loaded");
 const path = require("path");
+const fs = require("fs");
 const express = require("express");
 const hbs = require("hbs");
 const forecast = require("./utils/forecast.js");
 const geocode = require("./utils/geocode.js");
-const unsplash = require("./utils/unsplash.js");
+const zenserpIMG = require("./utils/zenserpIMG.js");
+const checkZenserpId = require("./utils/checkZenserpId.js");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+//deployment paths
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
 const staticPath = path.join(__dirname, "../public");
@@ -26,6 +28,14 @@ app.get("", (req, res) => {
         title: "Weather"
     });
 });
+
+try {
+    var zenserpIds = fs.readFileSync(__dirname + "/zenserpIds.JSON");
+} catch (err) {
+    console.log("Error : Couldn't load zenserIds.JSON");
+}
+zenserpIds = JSON.parse(zenserpIds);
+
 app.get("/weather", (req, res) => {
     if (!req.query.address) {
         return res.send({
@@ -36,29 +46,64 @@ app.get("/weather", (req, res) => {
         if (error) {
             return res.send({ error });
         }
-        forecast(latitude, longitude, (error, { summary, temperature, precipProbability } = {}) => {
-            if (error) {
-                return res.send({ error });
-            }
-            unsplash(location, (error, { fullImg, thumbImg, smallImg } = {}) => {
+        forecast(
+            latitude,
+            longitude,
+            (
+                error,
+                { summary, temperature, precipProbability, windSpeed, humidity, pressure } = {}
+            ) => {
                 if (error) {
-                    return res.send({
-                        imgError: error,
+                    return res.send({ error });
+                }
+                var i = 0;
+                zenserpIMG(location, zenserpIds[i], (error, { fullImg, source } = {}) => {
+                    if (error) {
+                        return res.send({
+                            imgError: error,
+                            summary: summary,
+                            temperature: temperature,
+                            precipProbability: precipProbability,
+                            location: location,
+                            windSpeed: windSpeed,
+                            humidity: humidity,
+                            pressure: (pressure / 1013.25).toPrecision(4)
+                        });
+                    }
+                    res.send({
+                        smallImg: fullImg,
                         summary: summary,
                         temperature: temperature,
                         precipProbability: precipProbability,
-                        location: location
+                        location: location,
+                        windSpeed: windSpeed,
+                        humidity: humidity,
+                        pressure: (pressure / 1013.25).toPrecision(4)
                     });
-                }
-                res.send({
-                    smallImg: smallImg,
-                    summary: summary,
-                    temperature: temperature,
-                    precipProbability: precipProbability,
-                    location: location
+                    checkZenserpId(zenserpIds[i], (error, { remaining_requests }) => {
+                        if (error)
+                            return console.log("Please check zenserp token validity manually");
+                        if (remaining_requests < 1) {
+                            console.log(
+                                "Remaining request : " + remaining_requests + " so switching"
+                            );
+                            zenserpIds = [...zenserpIds.slice(1, 3), zenserpIds[0]];
+                            fs.writeFile(
+                                __dirname + "/zenserpIds.JSON",
+                                JSON.stringify(zenserpIds),
+                                (err) => {
+                                    if (err) return console.log(err);
+                                }
+                            );
+                        } else {
+                            console.log(
+                                "Remaining request : " + remaining_requests + " so not switching"
+                            );
+                        }
+                    });
                 });
-            });
-        });
+            }
+        );
     });
 });
 
@@ -76,13 +121,6 @@ app.get("/about", (req, res) => {
     });
 });
 
-app.get("/help/*", (req, res) => {
-    res.render("404", {
-        name: "Kevin Tony",
-        title: "404 Help",
-        errorMessage: "Help article not found"
-    });
-});
 app.get("*", (req, res) => {
     res.render("404", {
         title: "404",
@@ -94,4 +132,3 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
     console.log("server up and running on " + port);
 });
-

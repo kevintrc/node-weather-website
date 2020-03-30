@@ -7,9 +7,9 @@ const geocode = (place, callback) => {
         ".json?access_token=pk.eyJ1Ijoia2V2aW50cmMiLCJhIjoiY2s4NXFnaG1nMDkxZjNnbzd3bGZpeTNvYSJ9.eL0R9TV3uLOWBRk0e5GiIA";
     request({ url: url, json: true }, (error, { body } = {}) => {
         if (error) {
-            callback("Unable to connect to location server(mapbox) ..", undefined);
+            callback("Unable to connect to location server(mapbox)", undefined);
         } else if (body.features.length === 0) {
-            callback("Unable to find location with entered name ..", undefined);
+            callback("Unable to find location with entered name", undefined);
         } else {
             callback(undefined, {
                 longitude: body.features[0].center[0],

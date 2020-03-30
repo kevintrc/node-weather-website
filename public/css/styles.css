@@ -1,30 +1,39 @@
 body {
     color: black;
     font-family: arial;
-    text-align: center;
+    text-align: left;
     max-width: 650px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    min-height: 89vh;
+    min-height: 90vh;
+}
+p {
+    animation: fadeIn ease-in 500ms;
+    -webkit-animation: fadeIn ease-in 500ms;
 }
 form {
+    animation: fadeIn ease-in 500ms;
+    -webkit-animation: fadeIn ease-in 500ms;
     margin-top: 30px;
+}
+form input {
+    size: 40px;
 }
 .main-content {
     flex-grow: 1;
 }
 h1 {
-    font-size: 60px;
-    margin-bottom: 18px;
+    font-size: 65px;
+    margin-bottom: 16px;
+    color: darkgreen;
 }
 header a {
     text-decoration: solid;
     margin-right: 16px;
-    color: green;
+    color: darkgreen;
 }
 header {
-    color: green;
     margin-top: 16px;
     margin-bottom: 40px;
     border-bottom: 1px solid brown;
@@ -37,12 +46,113 @@ footer {
     padding: 16px 0;
 }
 #aboutimg {
+    animation: fadeIn ease-in 500ms;
+    -webkit-animation: fadeIn ease-in 500ms;
     width: 300px;
+    margin: 10px auto;
 }
 #resimg {
+    animation: fadeIn ease-in 500ms;
+    -webkit-animation: fadeIn ease-in 500ms;
     display: block;
     height: 40vh;
     max-width: 650px;
-    margin: 0 auto;
-    padding-top: 70px;
+    padding-top: 40px;
+}
+#response {
+    animation: fadeIn ease-in 500ms;
+    -webkit-animation: fadeIn ease-in 500ms;
+    white-space: pre;
+}
+
+/* ////////////////fade/////////////// */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
