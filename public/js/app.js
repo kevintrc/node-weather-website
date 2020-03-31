@@ -12,6 +12,7 @@ downloadingImage.onload = function() {
 
 weatherform.addEventListener("submit", (e) => {
     e.preventDefault();
+    locationMessage.textContent = "";
     // document.body.style.backgroundImage = `url(/img/IMG_0286.jpg)`;
     downloadingImage.src = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
     fetch("/weather?address=" + encodeURIComponent(inputbox.value)).then((response) => {
