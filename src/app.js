@@ -75,7 +75,7 @@ app.get("/weather", (req, res) => {
                             location: location,
                             windSpeed: windSpeed,
                             icon: icon,
-                            humidity: humidity,
+                            humidity: humidity * 100,
                             pressure: (pressure / 1013.25).toPrecision(4)
                         });
                     }
