@@ -51,7 +51,15 @@ app.get("/weather", (req, res) => {
             longitude,
             (
                 error,
-                { summary, temperature, precipProbability, windSpeed, humidity, pressure } = {}
+                {
+                    summary,
+                    temperature,
+                    precipProbability,
+                    windSpeed,
+                    humidity,
+                    pressure,
+                    icon
+                } = {}
             ) => {
                 if (error) {
                     return res.send({ error });
@@ -66,6 +74,7 @@ app.get("/weather", (req, res) => {
                             precipProbability: precipProbability,
                             location: location,
                             windSpeed: windSpeed,
+                            icon: icon,
                             humidity: humidity,
                             pressure: (pressure / 1013.25).toPrecision(4)
                         });
@@ -78,6 +87,7 @@ app.get("/weather", (req, res) => {
                         location: location,
                         windSpeed: windSpeed,
                         humidity: humidity,
+                        icon: icon,
                         pressure: (pressure / 1013.25).toPrecision(4)
                     });
                     checkZenserpId(zenserpIds[i], (error, { remaining_requests }) => {

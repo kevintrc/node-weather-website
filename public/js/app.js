@@ -12,7 +12,8 @@ downloadingImage.onload = function() {
 
 weatherform.addEventListener("submit", (e) => {
     e.preventDefault();
-    downloadingImage.src = smallImg = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
+    // document.body.style.backgroundImage = `url(/img/IMG_0286.jpg)`;
+    downloadingImage.src = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
     fetch("/weather?address=" + encodeURIComponent(inputbox.value)).then((response) => {
         response
             .json()
@@ -27,6 +28,7 @@ weatherform.addEventListener("submit", (e) => {
                     imgError,
                     windSpeed,
                     humidity,
+                    icon,
                     pressure
                 }) => {
                     if (error) responseMessage.textContent = error;
@@ -42,6 +44,14 @@ weatherform.addEventListener("submit", (e) => {
                     }
                     if (imgError) imgMessage.textContent = imgError;
                     else downloadingImage.src = smallImg;
+                    setTimeout(() => {
+                        if (
+                            downloadingImage.complete == false ||
+                            downloadingImage.src ==
+                                "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+                        )
+                            downloadingImage.src = `/img/${icon}.jpg`;
+                    }, 10000);
                 }
             );
     });
