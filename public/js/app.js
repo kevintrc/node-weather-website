@@ -9,10 +9,12 @@ var downloadingImage = new Image();
 downloadingImage.onload = function() {
     image.src = this.src;
 };
-
+var loadcheck;
 weatherform.addEventListener("submit", (e) => {
     e.preventDefault();
+    clearTimeout(loadcheck);
     locationMessage.textContent = "";
+    imgMessage.textContent = "";
     responseMessage.textContent = "";
     // document.body.style.backgroundImage = `url(/img/IMG_0286.jpg)`;
     downloadingImage.src = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
@@ -44,16 +46,16 @@ weatherform.addEventListener("submit", (e) => {
                             `Pressure : ${pressure} atm | ` +
                             `Wind speed : ${windSpeed} m/s`;
                     }
-                    if (imgError) imgMessage.textContent = imgError;
+                    if (imgError) imgMessage.textContent = imgError + ".Try search again";
                     else downloadingImage.src = smallImg;
-                    setTimeout(() => {
+                    loadcheck = setTimeout(() => {
                         if (
                             downloadingImage.complete == false ||
                             downloadingImage.src ==
                                 "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
                         )
                             downloadingImage.src = `/img/${icon}.jpg`;
-                    }, 20000);
+                    }, 15000);
                 }
             );
     });

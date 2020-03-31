@@ -66,8 +66,9 @@ app.get("/weather", (req, res) => {
                 }
                 var i = 0;
                 zenserpIMG(location, zenserpIds[i], (error, { fullImg, source } = {}) => {
+                    console.log("location : " + location);
                     if (error) {
-                        return res.send({
+                        res.send({
                             imgError: error,
                             summary: summary,
                             temperature: temperature,
@@ -78,22 +79,23 @@ app.get("/weather", (req, res) => {
                             humidity: humidity * 100,
                             pressure: (pressure / 1013.25).toPrecision(4)
                         });
+                    } else {
+                        res.send({
+                            smallImg: fullImg,
+                            summary: summary,
+                            temperature: temperature,
+                            precipProbability: precipProbability,
+                            location: location,
+                            windSpeed: windSpeed,
+                            humidity: humidity * 100,
+                            icon: icon,
+                            pressure: (pressure / 1013.25).toPrecision(4)
+                        });
                     }
-                    res.send({
-                        smallImg: fullImg,
-                        summary: summary,
-                        temperature: temperature,
-                        precipProbability: precipProbability,
-                        location: location,
-                        windSpeed: windSpeed,
-                        humidity: humidity * 100,
-                        icon: icon,
-                        pressure: (pressure / 1013.25).toPrecision(4)
-                    });
-                    checkZenserpId(zenserpIds[i], (error, { remaining_requests }) => {
+                    checkZenserpId(zenserpIds[i], (error, { remaining_requests } = {}) => {
                         if (error)
                             return console.log("Please check zenserp token validity manually");
-                        if (remaining_requests < 1) {
+                        if (!remaining_requests) {
                             console.log(
                                 "Remaining request : " + remaining_requests + " so switching"
                             );

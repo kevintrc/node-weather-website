@@ -13,7 +13,6 @@ const geocode = (place, callback) => {
         } else {
             const country = body.features[0].place_name.split(",");
             const locationNew = body.features[0].text + " ," + country[country.length - 1];
-            console.log("location is :" + locationNew);
             callback(undefined, {
                 longitude: body.features[0].center[0],
                 latitude: body.features[0].center[1],
