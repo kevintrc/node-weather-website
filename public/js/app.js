@@ -51,7 +51,7 @@ weatherform.addEventListener("submit", (e) => {
                                 "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
                         )
                             downloadingImage.src = `/img/${icon}.jpg`;
-                    }, 10000);
+                    }, 20000);
                 }
             );
     });
