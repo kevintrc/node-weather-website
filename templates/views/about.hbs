@@ -17,6 +17,11 @@
         </p>
     </div>
     {{>footer}}
+    <script>
+        var image = document.images[0];
+        image.onload = function () {
+            image.style.visibility = 'visible';
+        };</script>
 </body>
 
 </html>
