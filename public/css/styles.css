@@ -1,7 +1,7 @@
 .js-loading *,
 .js-loading *:before,
 .js-loading *:after {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
 }
 
 body {
@@ -52,10 +52,9 @@ footer {
     padding: 16px 0;
 }
 #aboutimg {
-    animation: fadeIn ease-in 500ms;
-    -webkit-animation: fadeIn ease-in 500ms;
+    animation: fadeIn ease-in 1s;
+    -webkit-animation: fadeIn ease-in 1s;
     width: 300px;
-    visibility: visible;
     margin: 10px auto;
 }
 #resimg {
