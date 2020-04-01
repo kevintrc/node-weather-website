@@ -76,7 +76,7 @@ app.get("/weather", (req, res) => {
                             location: location,
                             windSpeed: windSpeed,
                             icon: icon,
-                            humidity: humidity * 100,
+                            humidity: (humidity * 100).toPrecision(3),
                             pressure: (pressure / 1013.25).toPrecision(4)
                         });
                     } else {
@@ -87,7 +87,7 @@ app.get("/weather", (req, res) => {
                             precipProbability: precipProbability,
                             location: location,
                             windSpeed: windSpeed,
-                            humidity: humidity * 100,
+                            humidity: (humidity * 100).toPrecision(3),
                             icon: icon,
                             pressure: (pressure / 1013.25).toPrecision(4)
                         });
