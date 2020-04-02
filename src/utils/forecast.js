@@ -16,9 +16,9 @@ const forecast = (latitude, longitude, callback) => {
             callback(undefined, {
                 summary: body.daily.data[0].summary,
                 temperature: body.currently.temperature,
-                precipProbability: body.currently.precipProbability,
-                humidity: body.currently.humidity,
-                pressure: body.currently.pressure,
+                precipProbability: (body.currently.precipProbability * 100).toPrecision(2),
+                humidity: (body.currently.humidity * 100).toPrecision(3),
+                pressure: (body.currently.pressure / 1013.25).toPrecision(4),
                 windSpeed: body.currently.windSpeed,
                 icon: body.currently.icon
             });

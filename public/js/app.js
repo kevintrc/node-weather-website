@@ -16,8 +16,7 @@ weatherform.addEventListener("submit", (e) => {
     locationMessage.textContent = "";
     imgMessage.textContent = "";
     responseMessage.textContent = "";
-    // document.body.style.backgroundImage = `url(/img/IMG_0286.jpg)`;
-    downloadingImage.src = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
+    image.src = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
     fetch("/weather?address=" + encodeURIComponent(inputbox.value)).then((response) => {
         response
             .json()
@@ -51,10 +50,11 @@ weatherform.addEventListener("submit", (e) => {
                     loadcheck = setTimeout(() => {
                         if (
                             downloadingImage.complete == false ||
-                            downloadingImage.src ==
+                            image.src ==
                                 "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-                        )
-                            downloadingImage.src = `/img/${icon}.jpg`;
+                        ) {
+                            image.src = `/img/${icon}.jpg`;
+                        }
                     }, 15000);
                 }
             );

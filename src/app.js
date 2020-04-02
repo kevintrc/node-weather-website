@@ -76,8 +76,8 @@ app.get("/weather", (req, res) => {
                             location: location,
                             windSpeed: windSpeed,
                             icon: icon,
-                            humidity: (humidity * 100).toPrecision(3),
-                            pressure: (pressure / 1013.25).toPrecision(4)
+                            humidity: humidity,
+                            pressure: pressure
                         });
                     } else {
                         res.send({
@@ -87,9 +87,9 @@ app.get("/weather", (req, res) => {
                             precipProbability: precipProbability,
                             location: location,
                             windSpeed: windSpeed,
-                            humidity: (humidity * 100).toPrecision(3),
+                            humidity: humidity,
                             icon: icon,
-                            pressure: (pressure / 1013.25).toPrecision(4)
+                            pressure: pressure
                         });
                     }
                     checkZenserpId(zenserpIds[i], (error, { remaining_requests } = {}) => {
@@ -99,7 +99,7 @@ app.get("/weather", (req, res) => {
                             console.log(
                                 "Remaining request : " + remaining_requests + " so switching"
                             );
-                            zenserpIds = [...zenserpIds.slice(1, 3), zenserpIds[0]];
+                            zenserpIds = [...zenserpIds.slice(1, zenserpIds.length), zenserpIds[0]];
                             fs.writeFile(
                                 __dirname + "/zenserpIds.JSON",
                                 JSON.stringify(zenserpIds),
