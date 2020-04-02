@@ -65,7 +65,7 @@ app.get("/weather", (req, res) => {
                     return res.send({ error });
                 }
                 var i = 0;
-                zenserpIMG(location, zenserpIds[i], (error, { fullImg, source } = {}) => {
+                zenserpIMG(location, zenserpIds[i], (error, { images, source } = {}) => {
                     console.log("location : " + location);
                     if (error) {
                         res.send({
@@ -81,7 +81,7 @@ app.get("/weather", (req, res) => {
                         });
                     } else {
                         res.send({
-                            smallImg: fullImg,
+                            images: images,
                             summary: summary,
                             temperature: temperature,
                             precipProbability: precipProbability,

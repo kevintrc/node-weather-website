@@ -15,7 +15,7 @@ const zenserpIMG = (place, ID, callback) => {
             callback("Unable to find image for entered place", undefined);
         } else {
             callback(undefined, {
-                fullImg: body.image_results[0].sourceUrl,
+                images: body.image_results,
                 source: body.image_results[0].source
             });
         }

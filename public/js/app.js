@@ -12,7 +12,7 @@ downloadingImage.onload = function() {
 var loadcheck;
 weatherform.addEventListener("submit", (e) => {
     e.preventDefault();
-    clearTimeout(loadcheck);
+    clearInterval(loadcheck);
     locationMessage.textContent = "";
     imgMessage.textContent = "";
     responseMessage.textContent = "";
@@ -27,13 +27,13 @@ weatherform.addEventListener("submit", (e) => {
                     temperature,
                     precipProbability,
                     location,
-                    smallImg,
+                    images,
                     imgError,
                     windSpeed,
                     humidity,
                     icon,
                     pressure
-                }) => {
+                } = {}) => {
                     if (error) responseMessage.textContent = error;
                     else {
                         locationMessage.textContent = location;
@@ -46,16 +46,37 @@ weatherform.addEventListener("submit", (e) => {
                             `Wind speed : ${windSpeed} m/s`;
                     }
                     if (imgError) imgMessage.textContent = imgError + ".Try search again";
-                    else downloadingImage.src = smallImg;
-                    loadcheck = setTimeout(() => {
-                        if (
-                            downloadingImage.complete == false ||
-                            image.src ==
-                                "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-                        ) {
-                            image.src = `/img/${icon}.jpg`;
-                        }
-                    }, 15000);
+                    else {
+                        var i = 0;
+                        downloadingImage.src = images[i].sourceUrl;
+                        loadcheck = setInterval(() => {
+                            i++;
+                            console.log(i);
+                            if (
+                                downloadingImage.complete == false ||
+                                image.src ==
+                                    "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+                            ) {
+                                if (i == 2) {
+                                    if (
+                                        !confirm(
+                                            "Couldn't fetch a suitable picture. Do you wish to keep trying?"
+                                        )
+                                    ) {
+                                        image.src = `/img/${icon}.jpg`;
+                                        clearInterval(loadcheck);
+                                    }
+                                } else {
+                                    if (i > 8) {
+                                        image.src = `/img/${icon}.jpg`;
+                                        clearInterval(loadcheck);
+                                    }
+                                    console.log("Couldn't load image so trying next");
+                                    downloadingImage.src = images[i].sourceUrl;
+                                }
+                            } else clearInterval(loadcheck);
+                        }, 9000);
+                    }
                 }
             );
     });
