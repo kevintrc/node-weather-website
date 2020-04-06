@@ -57,31 +57,36 @@ app.get("/weather", (req, res) => {
                return res.send({ error });
             }
             var i = 0;
-            zenserpIMG(location, zenserpIds[i], (error, { images, source } = {}) => {
+            zenserpIMG(location, zenserpIds[i], (imgError, { images, source } = {}) => {
                console.log("location : " + location);
-               if (error) {
+               if (imgError) {
                   res.send({
-                     imgError: error,
-                     summary: summary,
-                     temperature: temperature,
-                     precipProbability: precipProbability,
-                     location: location,
-                     windSpeed: windSpeed,
-                     icon: icon,
-                     humidity: humidity,
-                     pressure: pressure,
+                     imgError,
+                     summary,
+                     temperature,
+                     precipProbability,
+                     location,
+                     windSpeed,
+                     icon,
+                     humidity,
+                     pressure,
+                     latitude,
+                     longitude,
                   });
                } else {
                   res.send({
-                     images: images,
-                     summary: summary,
-                     temperature: temperature,
-                     precipProbability: precipProbability,
-                     location: location,
-                     windSpeed: windSpeed,
-                     humidity: humidity,
-                     icon: icon,
-                     pressure: pressure,
+                     images,
+                     source,
+                     summary,
+                     temperature,
+                     precipProbability,
+                     location,
+                     windSpeed,
+                     humidity,
+                     icon,
+                     pressure,
+                     latitude,
+                     longitude,
                   });
                }
                checkZenserpId(zenserpIds[i], (error, { remaining_requests } = {}) => {

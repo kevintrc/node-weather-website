@@ -8,6 +8,7 @@ body {
    flex-direction: column;
    min-height: 90vh;
 }
+
 p {
    animation: fadeIn ease-in 500ms;
    -webkit-animation: fadeIn ease-in 500ms;
@@ -29,6 +30,9 @@ header a {
    text-decoration: solid;
    margin-right: 16px;
    color: darkgreen;
+}
+a {
+   text-decoration: solid;
 }
 header {
    margin-top: 16px;
@@ -62,6 +66,7 @@ input {
    animation: fadeIn ease-in 500ms;
    -webkit-animation: fadeIn ease-in 500ms;
    display: block;
+   min-width: 400px;
    max-width: 650px;
    padding-top: 40px;
 }
@@ -69,6 +74,30 @@ input {
    animation: fadeIn ease-in 500ms;
    -webkit-animation: fadeIn ease-in 500ms;
    white-space: pre;
+}
+
+/* rainbow */
+.rainbow {
+   font-family: monospace;
+   animation: colorRotate 2s linear 0s infinite;
+}
+
+@keyframes colorRotate {
+   from {
+      color: #6666ff;
+   }
+   10% {
+      color: #0099ff;
+   }
+   50% {
+      color: #00ff00;
+   }
+   75% {
+      color: #ff3399;
+   }
+   100% {
+      color: #6666ff;
+   }
 }
 
 /* ////////////////fade/////////////// */

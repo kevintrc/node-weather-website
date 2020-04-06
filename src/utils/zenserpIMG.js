@@ -16,7 +16,6 @@ const zenserpIMG = (place, ID, callback) => {
       } else {
          callback(undefined, {
             images: body.image_results,
-            source: body.image_results[0].source,
          });
       }
    });

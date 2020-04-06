@@ -5,6 +5,7 @@
     <title>Weather</title>
     <meta charset=UTF-8>
     <link rel="icon" href="/img/IMG_0286.jpg">
+    <script src="https://kit.fontawesome.com/550ba3033a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
@@ -14,14 +15,17 @@
         <p>Use this site to get weather info</p>
         <form>
             <input placeholder="Enter location with state or country">
-            <button>Search</button>
+            <button class='rainbow'>Search</button>
         </form>
         <h3></h3>
+        <a href="" class="rainbow" id="gmaps" target="_blank"><i class="fas fa-map-marker-alt"></i> View place in google
+            maps</a>
         <p id='response'></p>
         <p id='tapMessage'>
             <img id='resimg' onclick="play()">
             <p id='imgresponse'></p>
             <p style="color:red;" id='tap'>Tap image to load next</p>
+            <p id="imgsource" style="font-style: italic;"></p>
     </div>
 
     {{>footer}}
