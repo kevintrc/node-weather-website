@@ -75,6 +75,11 @@ input {
    -webkit-animation: fadeIn ease-in 500ms;
    white-space: pre;
 }
+#imgsource {
+   font-size: 4 px;
+   font-style: italic;
+   color: brown;
+}
 
 /* rainbow */
 .rainbow {
