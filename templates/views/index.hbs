@@ -13,13 +13,15 @@
         {{>header}}
         <p>Use this site to get weather info</p>
         <form>
-            <input placeholder="Enter location">
+            <input placeholder="Enter location with state or country">
             <button>Search</button>
         </form>
         <h3></h3>
         <p id='response'></p>
-        <img id='resimg'>
-        <p id='imgresponse'></p>
+        <p id='tapMessage'>
+            <img id='resimg' onclick="play()">
+            <p id='imgresponse'></p>
+            <p style="color:red;" id='tap'>Tap image to load next</p>
     </div>
 
     {{>footer}}
