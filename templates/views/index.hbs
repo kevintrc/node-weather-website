@@ -15,8 +15,17 @@
         <p>Use this site to get weather info</p>
         <form>
             <input placeholder="Enter location with state or country">
-            <button class='rainbow'>Search</button>
+            <button type="submit" class='rainbow'>Search</button><button type="button" onclick="suggest()"
+                class="rainbow">Show
+                suggestions</button>
         </form>
+        <ul style="display: none;" id="list">
+            <li><a href="#" onclick="submitSuggest(this);">as</a></li>
+            <li><a href="#" onclick="submitSuggest(this);">as</a></li>
+            <li><a href="#" onclick="submitSuggest(this);">as</a></li>
+            <li><a href="#" onclick="submitSuggest(this);">as</a></li>
+            <li><a href="#" onclick="submitSuggest(this);">as</a></li>
+        </ul>
         <h3></h3>
         <a href="" class="rainbow" id="gmaps" target="_blank"><i class="fas fa-map-marker-alt"></i> View place in google
             maps</a>
